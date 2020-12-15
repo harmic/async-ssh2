@@ -3,7 +3,7 @@
 extern crate async_ssh2;
 extern crate tempfile;
 
-use smol::Async;
+use async_io::Async;
 use std::{env, net::{TcpStream, ToSocketAddrs}};
 
 mod agent;

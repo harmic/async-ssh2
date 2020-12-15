@@ -1,5 +1,5 @@
 use crate::Error;
-use smol::Async;
+use async_io::Async;
 use std::{io, net::TcpStream};
 
 pub async fn run_ssh2_fn<R, F: FnMut() -> Result<R, ssh2::Error>>(

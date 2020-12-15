@@ -1,6 +1,6 @@
 use crate::{util::run_ssh2_fn, Error};
 use futures::prelude::*;
-use smol::Async;
+use async_io::Async;
 use ssh2::{self, FileStat, OpenFlags, OpenType};
 use std::{
     io::{self, Read, Seek, Write},

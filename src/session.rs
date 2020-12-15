@@ -1,7 +1,7 @@
 use crate::{
     agent::Agent, channel::Channel, listener::Listener, sftp::Sftp, util::run_ssh2_fn, Error,
 };
-use smol::Async;
+use async_io::Async;
 use ssh2::{
     self, DisconnectCode, HashType, HostKeyType, KeyboardInteractivePrompt, KnownHosts, MethodType,
     ScpFileStat,
@@ -47,10 +47,6 @@ impl Session {
     /// See [`new`](ssh2::Session::new).
     pub fn new() -> Result<Session, Error> {
         let session = ssh2::Session::new()?;
-        static START: Once = Once::new();
-        START.call_once(|| {
-            std::thread::spawn(|| smol::run(futures::future::pending::<()>()));
-        });
         session.set_blocking(false);
 
         Ok(Self {
@@ -105,7 +101,7 @@ impl Session {
     /// ```rust,no_run
     /// use async_ssh2::Session;
     /// use std::net::TcpStream;
-    /// use smol::Async;
+    /// use async_io::Async;
     ///
     /// #[tokio::main]
     /// async fn main() {
