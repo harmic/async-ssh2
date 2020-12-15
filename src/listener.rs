@@ -1,5 +1,5 @@
-use crate::{channel::Channel, Error};
-use smol::{Async, Timer};
+use crate::{channel::Channel, util::run_ssh2_fn, Error};
+use async_io::{Async, Timer};
 use ssh2::{self};
 use std::{net::TcpStream, sync::Arc, time::Duration};
 

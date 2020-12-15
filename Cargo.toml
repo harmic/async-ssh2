@@ -16,7 +16,7 @@ vendored-openssl = ["ssh2/vendored-openssl"]
 
 [dependencies]
 ssh2 = "0.8"
-smol = "0.3"
+async-io = "^1.3"
 futures = "0.3.4"
 
 [dev-dependencies]
