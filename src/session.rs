@@ -14,7 +14,7 @@ use std::{
     convert::From,
     net::TcpStream,
     path::Path,
-    sync::{Arc, Once},
+    sync::Arc,
 };
 
 /// See [`Session`](ssh2::Session).
