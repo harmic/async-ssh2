@@ -184,11 +184,11 @@ impl<'a> AsyncWrite for Channel<'a> {
     }
 
     fn poll_close(mut self: Pin<&mut Self>, cx: &mut Context<'_>) -> Poll<io::Result<()>> {
-        self.stream
-            .clone()
-            .write_with(|_s| self.inner.close().map_err(|e| io::Error::from(ssh2::Error::from_errno(e.code()))))
-            .boxed()
-            .poll_unpin(cx)
+        poll_ssh2_io_op(cx, 
+            &self.stream.clone(), 
+            &self.inner_session, 
+            || self.inner.close().map_err(|e| io::Error::from(ssh2::Error::from_errno(e.code())))
+        )
     }
 }
 
